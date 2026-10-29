@@ -1,0 +1,18 @@
+package: community.lazycat.app.chinesesubfinder
+version: 0.55.3
+name: ChineseSubFinder
+description: Automated Chinese subtitle downloader for movies and TV shows, works with Radarr Sonarr and media libraries
+min_os_version: "1.5.0"
+homepage: https://github.com/ChineseSubFinder/ChineseSubFinder
+author: ChineseSubFinder
+license: GPL-3.0
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: ChineseSubFinder
+    description: 自动化中文字幕下载器：监控电影/剧集目录，自动从字幕站下载匹配的简繁中文字幕
+  en:
+    name: ChineseSubFinder
+    description: Automated Chinese subtitle downloader for movies and TV shows

@@ -1,0 +1,31 @@
+application:
+  subdomain: chinesesubfinder
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://chinesesubfinder:19035/
+
+services:
+  chinesesubfinder:
+    # upstream: docker.io/allanpk716/chinesesubfinder:v0.55.3
+    image: docker.1ms.run/allanpk716/chinesesubfinder:v0.55.3
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://127.0.0.1:19035/ >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    binds:
+      - /lzcapp/var/config:/config
+      - /lzcapp/var/media:/media
+
+usage: |
+  ChineseSubFinder 自动为电影和剧集下载中文字幕：打开 Web 界面完成初始化设置，
+  指定媒体目录（应用数据目录 media 下）后，它会定时扫描并从字幕站匹配下载简繁字幕。
+  可选对接 Radarr/Sonarr/TinyMediaManager 等，字幕文件保存在媒体文件同目录。
